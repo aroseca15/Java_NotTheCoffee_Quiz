@@ -1,0 +1,53 @@
+/* Web Dev Simplified (WDS) mentioned that using the ::before and ::after would making working with boxes and boarders easier. Which is good considering the rows and colsway for html looks cluddered to me. */
+* , *::before, *::after{
+box-sizing: border-box;
+font-family: Verdana;
+}
+
+
+/* I used the root to specifically have target control over the background colors. Web Dev Simplified on youtube showed me how to do this using minimal code. I chose to use the same colors since I am still unfamiliar with all of the color numbers. */
+:root{
+    --hue-neutral: 200;
+    --hue-incorrect: 0;
+    --hue-correct: 145;
+}
+
+/* In the body I removed the padding and margin as well as re-adjusted the width and height to ensure a complete change in background color. My plan is to make this change happen based on conditions. Also, I chose to agree with (WDS) and use the hsl() method to set the background color based on my --hue. I chose to make the hue-neutral 10% lighter. I felt (WDS) 20% was too dark for me.  */
+
+body{
+    --hue: var(--hue-neutral);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(var(--hue), 100%, 30%);
+}
+
+/* Both below are the css conditionals that I hope to use later. */
+body.correct{
+    --hue: var(--hue-correct);
+}
+
+body.incorrect{
+    --hue: var(--hue-incorrect);
+}
+
+
+/* I learned something new!(WDS) showed me how to control the box shadowing of a border. I put in '0' for both the y and x. This will give the shadowing the same impacted look for the whole box. Although I chose to make the fade 3px further and the blur to be 10px darker. I just liked that look better. Also, I like beigh more than the blinding white. */
+.container{
+    width: 800px;
+    max-width: 80%;
+    background-color: beige;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 20px 5px;
+}
+
+
+/*  */
+.btn-grid{
+    display: grid;
+}
