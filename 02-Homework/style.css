@@ -2,6 +2,7 @@
 * , *::before, *::after{
 box-sizing: border-box;
 font-family: Verdana;
+font-size: 30px
 }
 
 
@@ -10,6 +11,7 @@ font-family: Verdana;
     --hue-neutral: 200;
     --hue-incorrect: 0;
     --hue-correct: 145;
+    --hue-btn-neutral: 248;
 }
 
 /* In the body I removed the padding and margin as well as re-adjusted the width and height to ensure a complete change in background color. My plan is to make this change happen based on conditions. Also, I chose to agree with (WDS) and use the hsl() method to set the background color based on my --hue. I chose to make the hue-neutral 10% lighter. I felt (WDS) 20% was too dark for me.  */
@@ -50,4 +52,60 @@ body.incorrect{
 /*  */
 .btn-grid{
     display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin: 20px 0;
 }
+
+
+/*  */
+.btn{
+    --hue: var(--hue-btn-neutral);
+    border: 1px solid hsl(var(--hue), 100%, 5%);
+    background-color: hsl(var(--hue), 100%, 80%);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: black;
+    font-size: 20px;
+    outline: none;
+    
+}
+
+.btn:hover{
+    background-color: blanchedalmond;
+}
+
+
+/* Here I wanted the button to change color if the answer was "correct" or "incorrect". */
+.btn.correct{
+--hue: var(--hue-correct);
+}
+
+.btn.incorrect{
+    --hue: var(--hue-incorrect);
+}
+
+/* I restyled the "Start Quiz" button a few times before I got what I wanted. I also did research on "rem" and decided that they would be the most stable choice for the start button.  */
+#start{
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.controls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* I thought it was a neat idea to have the start button be first, then go in to the quiz. But I noticed that I needed to do something with the title "Code Quiz". So I made changes to adjust that as well. */
+.hide{
+    display: none;
+}
+
+#Title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
