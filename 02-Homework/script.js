@@ -87,7 +87,7 @@ function setNextQuestion(){
 }
 
 function showQuestion(question){
-    console.log('show question funciton')
+    console.log('show question function')
     // print current question
     questionElement.innerText = question.question;
 
