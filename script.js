@@ -168,17 +168,17 @@ function clockTick() {
 
 }
 
-const saveBtn = document.getElementById('save');
+// const saveBtn = document.getElementById('save');
 
-saveBtn.addEventListener("click", function(){
+// saveBtn.addEventListener("click", function(){
    
-    SCORE.push(score);
-    localStorage.setItem(JSON.stringify(SCORE));
+//     SCORE.push(score);
+//     localStorage.setItem(JSON.stringify(SCORE));
 
-    console.log(JSON.parse(localStorage.getItem())
+//     console.log(JSON.parse(localStorage.getItem())
 
-    window.location.assign("index.html");
-})
+//     window.location.assign("index.html");
+// })
 
 
 
