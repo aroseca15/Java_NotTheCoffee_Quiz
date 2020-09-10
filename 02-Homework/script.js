@@ -1,50 +1,26 @@
 
 // Variables to control timer:
-// const time = questions.length * 15;
-const questions = [
-    {
-        question: "What is Javascript?",
-        choices: ["Programing Language", "Coffee Shop", "Name of Play", "Story Book"],
-        answers: "Programing Language"
-    },
 
-    {
-        question: "HTML is considered the________ of a website..",
-        choices: ["Muscles", "Heart", "Skeleton", "Skin"],
-        answers: "Skeleton"
-    },
 
-    {
-        question: "What does 'document.getElementById' do?",
-        choices: ["Rename an element", "Create a div", "Runs in live server", "Grabs a specific element"],
-        answers: "Grabs a specific element"
-    },
+// 60
 
-    {
-        question: "What does CSS do for a website?",
-        choices: ["Gives them internet access", "Makes them look appealing", "CSS is another name for HTML", "None of the above"],
-        answers: "Makes them look appealing"
-    },
+// 2/4 = 
 
-    {
-        question: "Which is the correct way to grab a class element in CSS?",
-        choices: ["?Class", "!Class", "9Class", "None of the above"],
-        answers: "None of the above"
-    },
 
-    {
-        question: "What syntax is this: '$()'?",
-        choices: ["Javascript", "JQuery", "HTML", "CSS"],
-        answers: "JQuery"
-    },
+// 105
 
-    {
-        question: "Why is it good practice to keep JS and CSS separate from HTML?",
-        choices: ["Easier to debug", "Makes code look tidy", "Add new features easier ", "All the above"],
-        answers: "All the above"
-    } 
-];
+// 40
 
+
+//40 / 105 = 39%
+
+// 4 / 7 = 57%
+
+// 20
+
+
+
+let SCORE = 0;
 
 const startBtn = document.getElementById("start");
 startBtn.addEventListener('click' , startQuiz)
@@ -56,74 +32,140 @@ const answerBtnsElement = document.getElementById('answer-buttons');
 
 
 function startQuiz(){
-console.log('started');
-startBtn.classList.add('hide');
-shuffledQuestions = questions.sort(()=> Math.random() - .5);
-currentQuestionIndex = 0
-questionContainerElement.classList.remove('hide');
-setNextQuestion()
+    startBtn.classList.add('hide');
+    shuffledQuestions = questions.sort(()=> Math.random() - .5);
+    currentQuestionIndex = 0
+    questionContainerElement.classList.remove('hide');
+    setNextQuestion()
 }
 
+let questions = [
+    {
+        question: "What is Javascript?",
+        choices: ["Programing Language", "Coffee Shop", "Name of Play", "Story Book"],
+        answer: 0 , correct: true
+    },
+
+    {
+        question: "HTML is considered the________ of a website..",
+        choices: ["Muscles", "Heart", "Skeleton", "Skin"],
+        answer: 2 , correct: true
+    },
+
+    {
+        question: "What does 'document.getElementById' do?",
+        choices: ["Rename an element", "Create a div", "Runs in live server", "Grabs a specific element"],
+        answer: 3 , correct: true
+    },
+
+    {
+        question: "What does CSS do for a website?",
+        choices: ["Gives them internet access", "Makes them look appealing", "CSS is another name for HTML", "None of the above"],
+        answer: 1 , correct: true
+    },
+
+    {
+        question: "Which is the correct way to grab a class element in CSS?",
+        choices: ["?Class", "!Class", "9Class", "None of the above"],
+        answer: 3 , correct: true
+    },
+
+    {
+        question: "What syntax is this: '$()'?",
+        choices: ["Javascript", "JQuery", "HTML", "CSS"],
+        answer: 1 , correct: true
+    },
+
+    {
+        question: "Why is it good practice to keep JS and CSS separate from HTML?",
+        choices: ["Easier to debug", "Makes code look tidy", "Add new features easier ", "All the above"],
+        answer: 3 , correct: true
+    } 
+];
+
+
+let time = questions.length * 15;
+
 function setNextQuestion(){
-showQuestion(shuffledQuestions[currentQuestionIndex])
+    answerBtnsElement.innerHTML = '';
+    showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
 function showQuestion(question){
-questionElement.innerText = question.question;
-question.choices.forEach(answer => {
-  document.createElement('button');
-  button.innerText = choices.text;
-  button.classList.add('btn');
-  if (answer.correct){
-      button.dataset.correct = answer.correct
-  }
-  button.addEventListener('click' , selectAnswer);
-  answerButtonsElement.appendChild(button)
-})
+    console.log('show question funciton')
+    // print current question
+    questionElement.innerText = question.question;
+
+    // render questions buttons
+    questions[currentQuestionIndex].choices.forEach((choice, i) => {
+        let button = document.createElement('button');
+        button.innerText = choice;
+        button.classList.add('btn');
+
+        button.addEventListener('click', () => checkAnswer(i, button));
+
+
+        
+        answerBtnsElement.appendChild(button);
+    })
 }
 
-function resetChoices(){
-    while (answerBtnsElement.firstChild){
-        answerBtnsElement.removeChild
-        (answerBtnsElement.firstChild)
+
+function checkAnswer(index, button){
+    if(index == questions[currentQuestionIndex].answer){
+        SCORE ++
+        
+        button.classList.add('correct')
+    }else{
+        button.classList.add('incorrect')
+    }
 
 
+    currentQuestionIndex ++
+
+    if(currentQuestionIndex < questions.length){
+        console.log(currentQuestionIndex, questions.length)
+        setNextQuestion()
+    }else{
+        endQuiz()
     }
 }
 
-function selectAnswer(e){
 
-
+function endQuiz() {
+    alert('Quiz finished')
 }
+ 
 
-
-// const timerEL = document.getElementById("time");
+let timerEL = document.getElementById("timer");
 
 
 // let timerID;
 
 // Function to start quiz:
-// startBtn.addEventListener('click', function StartQuiz() {
-//     timerID = setInterval(clockTick, 1000);
-//     timerEL.textContent = time;
-// })
+startBtn.addEventListener('click', function StartQuiz() {
+    // console.log(time)
+    timerID = setInterval(clockTick, 1000);
+    timerEL.textContent = time;
+})
 
 
 // Function to Stop Quiz / Counter:
-// function EndQuiz() {
-//     clearInterval(timerID);
-// }
+function EndQuiz() {
+    clearInterval(timerID);
+}
 
-// // Function for ClockTick:
-// function clockTick() {
-//     time--;
-//     timerEL.textContent = time;
-//     // check if user ran out of time:
-//     if (time <= 0) {
-//         EndQuiz();
-//     }
+// Function for ClockTick:
+function clockTick() {
+    console.log(time)
+    time--;
+    timerEL.textContent = time;
+    // check if user ran out of time:
+    if (time <= 0) {
+        EndQuiz();
+    }
 
-// }
+}
 
 
 
