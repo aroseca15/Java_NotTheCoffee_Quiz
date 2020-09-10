@@ -14,12 +14,6 @@
 
 //40 / 105 = 39%
 
-// 4 / 7 = 57%
-
-// 20
-
-
-
 let SCORE = 0;
 
 const startBtn = document.getElementById("start");
@@ -28,6 +22,7 @@ let shuffledQuestions, currentQuestionIndex;
 const questionContainerElement = document.getElementById('question-container');
 const questionElement = document.getElementById('question');
 const answerBtnsElement = document.getElementById('answer-buttons');
+let body = document.getElementById('body')
 
 
 
@@ -84,7 +79,7 @@ let questions = [
 ];
 
 
-let time = questions.length * 15;
+let time = questions.length * 20;
 
 function setNextQuestion(){
     answerBtnsElement.innerHTML = '';
@@ -112,11 +107,14 @@ function showQuestion(question){
 
 
 function checkAnswer(index, button){
+    
+    
     if(index == questions[currentQuestionIndex].answer){
         SCORE ++
-        
+        alert('Correct!!!')
         button.classList.add('correct')
     }else{
+        alert('Wrong!!!')
         button.classList.add('incorrect')
     }
 
@@ -128,7 +126,7 @@ function checkAnswer(index, button){
         setNextQuestion()
     }else{
         endQuiz()
-    }
+    } return SCORE;
 }
 
 
@@ -140,7 +138,7 @@ function endQuiz() {
 let timerEL = document.getElementById("timer");
 
 
-// let timerID;
+let timerID;
 
 // Function to start quiz:
 startBtn.addEventListener('click', function StartQuiz() {
@@ -163,9 +161,24 @@ function clockTick() {
     // check if user ran out of time:
     if (time <= 0) {
         EndQuiz();
+    } else{ 
+    
+
     }
 
 }
+
+const saveBtn = document.getElementById('save');
+
+saveBtn.addEventListener("click", function(){
+   
+    SCORE.push(score);
+    localStorage.setItem(JSON.stringify(SCORE));
+
+    console.log(JSON.parse(localStorage.getItem())
+
+    window.location.assign("index.html");
+})
 
 
 
